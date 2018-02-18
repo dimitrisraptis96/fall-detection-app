@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/dimitris/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.3/92fb46ea210fc3f0ab1125f28b33cf098583e8cf/MPAndroidChart-v3.0.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="92fb46ea210fc3f0ab1125f28b33cf098583e8cf">
+        <dex dex="/home/dimitris/Documents/github/FallDetector/app/build/intermediates/pre-dexed/debug/MPAndroidChart-v3.0.3_ede4148b7d473672a1adf569da0515cb3ee6dbb2.jar" />
+    </item>
+
+</items>
