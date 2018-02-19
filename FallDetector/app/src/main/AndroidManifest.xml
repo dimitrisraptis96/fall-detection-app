@@ -20,10 +20,6 @@
         <activity android:name=".SetActivity" />
         <activity android:name=".StartActivity" />
 
-        <service
-            android:name=".AccelerometerService"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>

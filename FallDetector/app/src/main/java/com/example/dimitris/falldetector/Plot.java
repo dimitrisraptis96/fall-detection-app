@@ -2,6 +2,7 @@ package com.example.dimitris.falldetector;
 
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -23,11 +24,16 @@ public class Plot implements OnChartValueSelectedListener {
         mChart = chart;
     }
 
-    public void setChart(){
+    public void setupChart(){
         mChart.setOnChartValueSelectedListener(this);
 
         // enable description text
-        mChart.getDescription().setEnabled(true);
+        mChart.getDescription().setEnabled(false);
+//
+//        mChart.getDescription().setText("Fall monitor");
+//        mChart.getDescription().setTextColor(Color.parseColor("#7186c7"));
+//        mChart.getDescription().setTextSize(8f);
+//        mChart.getDescription().setTextAlign(Paint.Align.RIGHT);
 
         // enable touch gestures
         mChart.setTouchEnabled(true);
@@ -41,10 +47,10 @@ public class Plot implements OnChartValueSelectedListener {
         mChart.setPinchZoom(true);
 
         // set an alternative background color
-        mChart.setBackgroundColor(Color.LTGRAY);
+        mChart.setBackgroundColor(Color.WHITE);
 
         LineData data = new LineData();
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.GRAY);
 
         // add empty data
         mChart.setData(data);
@@ -54,21 +60,21 @@ public class Plot implements OnChartValueSelectedListener {
 
         // modify the legend ...
         l.setForm(Legend.LegendForm.LINE);
-//        l.setTypeface(mTfLight);
-        l.setTextColor(Color.WHITE);
+        l.setTextColor(Color.GRAY);
 
         XAxis xl = mChart.getXAxis();
 //        xl.setTypeface(mTfLight);
-        xl.setTextColor(Color.WHITE);
+        xl.setTextColor(Color.GRAY);
         xl.setDrawGridLines(false);
+        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setAvoidFirstLastClipping(true);
         xl.setEnabled(true);
 
         YAxis leftAxis = mChart.getAxisLeft();
 //        leftAxis.setTypeface(mTfLight);
-        leftAxis.setTextColor(Color.WHITE);
-        leftAxis.setAxisMaximum(100f);
-        leftAxis.setAxisMinimum(0f);
+        leftAxis.setTextColor(Color.GRAY);
+        leftAxis.setAxisMaximum(30f);
+        leftAxis.setAxisMinimum(-30f);
         leftAxis.setDrawGridLines(true);
 
         YAxis rightAxis = mChart.getAxisRight();
@@ -112,16 +118,18 @@ public class Plot implements OnChartValueSelectedListener {
 
         LineDataSet set = new LineDataSet(null, "Acceleration");
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set.setColor(ColorTemplate.getHoloBlue());
+        set.setColor(Color.parseColor("#7186c7"));
         set.setCircleColor(Color.WHITE);
         set.setLineWidth(2f);
         set.setCircleRadius(1f);
         set.setFillAlpha(65);
-        set.setFillColor(ColorTemplate.getHoloBlue());
+        set.setFillColor(Color.parseColor("#7186c7"));
         set.setHighLightColor(Color.rgb(244, 117, 11));
-        set.setValueTextColor(Color.WHITE);
+        set.setValueTextColor(Color.parseColor("#7186c7"));
         set.setValueTextSize(9f);
         set.setDrawValues(false);
+//        set.setDrawFilled(true);
+//        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         return set;
     }
 

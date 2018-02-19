@@ -48,7 +48,7 @@ public class StartActivity extends AppCompatActivity{
         mToggle = (ToggleButton) findViewById(R.id.toggleButton);
 
         mPlot = new Plot(mLineChart);
-        mPlot.setChart();
+        mPlot.setupChart();
 
         // set accelerometer sensor
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

@@ -93,7 +93,7 @@ public class Accelerometer implements SensorEventListener {
                     // Send the value back to the Activity
                     Message msg = mHandler.obtainMessage(Constants.MESSAGE_CHANGED);
                     Bundle bundle = new Bundle();
-                    bundle.putFloat(Constants.VALUE, mAccelCurrent);
+                    bundle.putFloat(Constants.VALUE, mAccel);
                     msg.setData(bundle);
                     mHandler.sendMessage(msg);
 
