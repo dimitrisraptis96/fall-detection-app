@@ -1,9 +1,11 @@
 package com.example.dimitris.falldetector;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -71,13 +73,13 @@ public class StartActivity extends AppCompatActivity{
 
     public static final String MyPREFERENCES = "MyPrefs" ;
 
-    private String getUri(){
+    private String getContact(){
         SharedPreferences preferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 //        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String c = preferences.getString(Code,null);
-        String ph = preferences.getString(Phone,null);
-        Log.w(TAG, "tel: +" + c + ph);
-        return "tel: +" + c + ph;
+        String code = preferences.getString(Code,null);
+        String phone = preferences.getString(Phone,null);
+        Log.w(TAG, "tel: +" + code + phone);
+        return code+phone;
     }
 
     private final Handler mHandler = new Handler() {
@@ -90,9 +92,17 @@ public class StartActivity extends AppCompatActivity{
 
                     break;
                 case Constants.MESSAGE_EMERGENCY:
-//                    Intent intent = new Intent(android.content.Intent.ACTION_CALL, Uri.parse(getUri()));
-//                    startActivity(intent);
                     mToggle.setChecked(true);
+//
+//                    String contact = getContact();
+//                    if (contact != null) {
+//                        Toast.makeText(getApplicationContext(), "Calling for help!", Toast.LENGTH_SHORT).show();
+//                        Intent callIntent = new Intent(android.content.Intent.ACTION_CALL, Uri.parse("tel :" + contact));
+//                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(callIntent);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Please, set a contact to call", Toast.LENGTH_SHORT).show();
+//                    }
 
                     break;
                 case Constants.MESSAGE_TOAST:

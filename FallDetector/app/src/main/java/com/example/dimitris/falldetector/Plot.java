@@ -29,7 +29,7 @@ public class Plot implements OnChartValueSelectedListener {
 
         // enable description text
         mChart.getDescription().setEnabled(false);
-//
+        mChart.getDescription().setText("");
 //        mChart.getDescription().setText("Fall monitor");
 //        mChart.getDescription().setTextColor(Color.parseColor("#7186c7"));
 //        mChart.getDescription().setTextSize(8f);

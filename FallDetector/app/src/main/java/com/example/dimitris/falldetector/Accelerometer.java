@@ -32,14 +32,13 @@ public class Accelerometer implements SensorEventListener {
 
     private final static int CHECK_INTERVAL = 100; // [msec]
 
-    public static final String Code = "codeKey";
-    public static final String Phone = "phoneKey";
-
+    private Window mWindow;
 
     public Accelerometer(SensorManager sm, Sensor s, Handler h){
         mSensorManager = sm;
         mSensor = s;
         mHandler = h;
+        mWindow = new Window(1000/CHECK_INTERVAL); //sampling for 1 sec
     }
 
     public void startListening(){
@@ -56,7 +55,7 @@ public class Accelerometer implements SensorEventListener {
         } else {
             Log.w(TAG, "Warning: yes accelerometer");
 
-            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL); //sampling every 0.2sec => 5Hz
         }
     }
 
@@ -67,9 +66,9 @@ public class Accelerometer implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) { /*Safe not to implement*/ }
 
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         long curTime = System.currentTimeMillis();
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -96,6 +95,13 @@ public class Accelerometer implements SensorEventListener {
                     bundle.putFloat(Constants.VALUE, mAccel);
                     msg.setData(bundle);
                     mHandler.sendMessage(msg);
+
+                    mWindow.add(mAccelCurrent);
+                    if (mWindow.isFull() && mWindow.isFallDetected()){
+                        Log.w(TAG, "Fall detected by window class");
+                    }
+
+
 
                     if (mAccel > fallThreshold) {
 
