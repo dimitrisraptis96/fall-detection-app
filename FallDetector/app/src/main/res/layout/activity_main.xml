@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dimitris.falldetector.MainActivity">
+    tools:context="com.example.dimitris.falldetector.ui.MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:padding="100px"
             android:textAlignment="center"
-            android:text="Fall Detector"
+            android:text="@string/main_title"
             android:fontFamily="sans-serif"
             android:textAllCaps="true"
             android:textSize="30dp"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:padding="40px"
-            android:text="The app helps you in a fall emergency situation by calling a person you specify"
+            android:text="@string/main_description"
             android:fontFamily="sans-serif"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -45,7 +45,7 @@
             android:padding="30px"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
-            android:text="Choose contact"
+            android:text="@string/main_btn_choose"
             android:textColor="@color/white"/>
 
 
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="30px"
-            android:text="Start"
+            android:text="@string/main_btn_start"
             android:textColor="@color/white"/>
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.dimitris.falldetector;
+package com.example.dimitris.falldetector.core;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.example.dimitris.falldetector.Constants;
 
 
 public class Accelerometer implements SensorEventListener {
@@ -43,8 +45,6 @@ public class Accelerometer implements SensorEventListener {
 
     public void startListening(){
         if (mSensor == null) {
-            Log.w(TAG, "Warning: no accelerometer");
-
             // Send a failure message back to the Activity
             Message msg = mHandler.obtainMessage(Constants.MESSAGE_TOAST);
             Bundle bundle = new Bundle();
@@ -53,8 +53,6 @@ public class Accelerometer implements SensorEventListener {
             mHandler.sendMessage(msg);
 
         } else {
-            Log.w(TAG, "Warning: yes accelerometer");
-
             mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL); //sampling every 0.2sec => 5Hz
         }
     }
@@ -86,31 +84,35 @@ public class Accelerometer implements SensorEventListener {
                     mAccelCurrent =(float)Math.sqrt(accel_values[0]* accel_values[0] + accel_values[1]*accel_values[1]
                             + accel_values[2]*accel_values[2]);
 
-                    float delta = mAccelCurrent - mAccelLast;
-                    mAccel = mAccel * 0.9f + delta;
+                    // Initial approach
+//                    float delta = mAccelCurrent - mAccelLast;
+//                    mAccel = mAccel * 0.9f + delta;
 
                     // Send the value back to the Activity
                     Message msg = mHandler.obtainMessage(Constants.MESSAGE_CHANGED);
                     Bundle bundle = new Bundle();
-                    bundle.putFloat(Constants.VALUE, mAccel);
+                    bundle.putFloat(Constants.VALUE, mAccelCurrent);
                     msg.setData(bundle);
                     mHandler.sendMessage(msg);
 
                     mWindow.add(mAccelCurrent);
                     if (mWindow.isFull() && mWindow.isFallDetected()){
                         Log.w(TAG, "Fall detected by window class");
-                    }
-
-
-
-                    if (mAccel > fallThreshold) {
-
-                        Log.w(TAG, "acceleration greater than threshold");
-                        // Send the value back to the Activity
                         msg = mHandler.obtainMessage(Constants.MESSAGE_EMERGENCY);
                         mHandler.sendMessage(msg);
                     }
+
+//                    Inital approach
+//                    =====================================
+//                    if (mAccel > fallThreshold) {
+//
+//                        Log.w(TAG, "acceleration greater than threshold");
+//                        // Send the value back to the Activity
+//                        msg = mHandler.obtainMessage(Constants.MESSAGE_EMERGENCY);
+//                        mHandler.sendMessage(msg);
+//                    }
                 }
+
                 last_accel_values = accel_values.clone();
             }
         }

@@ -1,4 +1,4 @@
-package com.example.dimitris.falldetector;
+package com.example.dimitris.falldetector.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.dimitris.falldetector.R;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "MainActivity";
 
-    private Button set;
-    private Button start;
+    private Button btnSet;
+    private Button btnStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +21,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        set = (Button) findViewById(R.id.btn_set);
-        set.setOnClickListener(this);
+        btnSet = (Button) findViewById(R.id.btn_set);
+        btnSet.setOnClickListener(this);
 
-        start = (Button) findViewById(R.id.btn_start);
-        start.setOnClickListener(this);
+        btnStart = (Button) findViewById(R.id.btn_start);
+        btnStart.setOnClickListener(this);
     }
 
     @Override

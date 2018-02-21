@@ -1,8 +1,7 @@
-package com.example.dimitris.falldetector;
+package com.example.dimitris.falldetector.core;
 
 
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -15,7 +14,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 public class Plot implements OnChartValueSelectedListener {
     private LineChart mChart;
@@ -24,7 +22,7 @@ public class Plot implements OnChartValueSelectedListener {
         mChart = chart;
     }
 
-    public void setupChart(){
+    public void setUp(){
         mChart.setOnChartValueSelectedListener(this);
 
         // enable description text
@@ -62,26 +60,26 @@ public class Plot implements OnChartValueSelectedListener {
         l.setForm(Legend.LegendForm.LINE);
         l.setTextColor(Color.GRAY);
 
+        // x axis
         XAxis xl = mChart.getXAxis();
-//        xl.setTypeface(mTfLight);
         xl.setTextColor(Color.GRAY);
         xl.setDrawGridLines(false);
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setAvoidFirstLastClipping(true);
         xl.setEnabled(true);
 
+        // y axis
         YAxis leftAxis = mChart.getAxisLeft();
-//        leftAxis.setTypeface(mTfLight);
         leftAxis.setTextColor(Color.GRAY);
         leftAxis.setAxisMaximum(30f);
-        leftAxis.setAxisMinimum(-30f);
+        leftAxis.setAxisMinimum(0f);
         leftAxis.setDrawGridLines(true);
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setEnabled(false);
     }
 
-    protected void addEntry(float acceleration) {
+    public void addEntry(float acceleration) {
 
         LineData data = mChart.getData();
 

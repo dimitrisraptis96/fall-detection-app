@@ -1,4 +1,4 @@
-package com.example.dimitris.falldetector;
+package com.example.dimitris.falldetector.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,13 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
+import com.example.dimitris.falldetector.core.Accelerometer;
+import com.example.dimitris.falldetector.Constants;
+import com.example.dimitris.falldetector.core.Plot;
+import com.example.dimitris.falldetector.R;
 import com.github.mikephil.charting.charts.LineChart;
 
 public class StartActivity extends AppCompatActivity{
@@ -24,19 +26,13 @@ public class StartActivity extends AppCompatActivity{
     public static final String TAG = "StartActivity";
 
     private SwitchCompat mSwitchCompat;
-
-    private ToggleButton mToggle;
+//    private ToggleButton mToggle; // TODO: remove
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
 
     private LineChart mLineChart;
     private Plot mPlot;
-
-    public static final String Code = "codeKey";
-    public static final String Phone = "phoneKey";
-
-//    private AccelerometerService mService = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +43,10 @@ public class StartActivity extends AppCompatActivity{
 
         mLineChart = (LineChart) findViewById(R.id.chart);
 
-        mToggle = (ToggleButton) findViewById(R.id.toggleButton);
+//        mToggle = (ToggleButton) findViewById(R.id.toggleButton);
 
         mPlot = new Plot(mLineChart);
-        mPlot.setupChart();
+        mPlot.setUp();
 
         // set accelerometer sensor
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -71,15 +67,12 @@ public class StartActivity extends AppCompatActivity{
 
     }
 
-    public static final String MyPREFERENCES = "MyPrefs" ;
-
     private String getContact(){
-        SharedPreferences preferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String code = preferences.getString(Code,null);
-        String phone = preferences.getString(Phone,null);
+        SharedPreferences preferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        String code = preferences.getString(Constants.Code,null);
+        String phone = preferences.getString(Constants.Phone,null);
         Log.w(TAG, "tel: +" + code + phone);
-        return code+phone;
+        return code+" "+phone;
     }
 
     private final Handler mHandler = new Handler() {
@@ -92,17 +85,20 @@ public class StartActivity extends AppCompatActivity{
 
                     break;
                 case Constants.MESSAGE_EMERGENCY:
-                    mToggle.setChecked(true);
+//                    mToggle.setChecked(true);
 //
-//                    String contact = getContact();
-//                    if (contact != null) {
-//                        Toast.makeText(getApplicationContext(), "Calling for help!", Toast.LENGTH_SHORT).show();
-//                        Intent callIntent = new Intent(android.content.Intent.ACTION_CALL, Uri.parse("tel :" + contact));
-//                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(callIntent);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Please, set a contact to call", Toast.LENGTH_SHORT).show();
-//                    }
+                    String contact = getContact();
+                    if (contact != null) {
+                        Toast.makeText(getApplicationContext(), "Calling for help!", Toast.LENGTH_SHORT).show();
+                        Intent callIntent = new Intent(android.content.Intent.ACTION_CALL, Uri.parse("tel:" + contact));
+                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(callIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please, set a contact to call", Toast.LENGTH_SHORT).show();
+                    }
+
+                    // stop listening the sensor
+                    mSwitchCompat.setChecked(false);
 
                     break;
                 case Constants.MESSAGE_TOAST:

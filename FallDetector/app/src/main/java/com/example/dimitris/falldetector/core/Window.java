@@ -1,12 +1,13 @@
-package com.example.dimitris.falldetector;
+package com.example.dimitris.falldetector.core;
 
 import java.util.Collections;
 import java.util.LinkedList;
 
 public class Window {
+    public static final String TAG = "Window.java";
 
-    private final float THRESHOLD =  0.8f;
     private final int DEFAULT_SIZE = 10;
+    private final float THRESHOLD =  8f;
 
     private final int SIZE;
 
@@ -23,12 +24,12 @@ public class Window {
     }
 
     public void add(float value){
-        if (isFull()){
-            samples.add(value);
+        if (!isFull()){
+            samples.add(new Float(value));
             //add value
         } else {
             samples.removeFirst();
-            samples.add(value);
+            samples.add(new Float(value));
         }
     }
 

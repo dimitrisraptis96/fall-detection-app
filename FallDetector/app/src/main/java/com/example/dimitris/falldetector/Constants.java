@@ -14,4 +14,10 @@ public interface Constants {
     public static final String VALUE = "value";
     public static final String TOAST = "toast";
 
+    // Shared preferences keys
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String Code = "codeKey";
+    public static final String Phone = "phoneKey";
+
+
 }
