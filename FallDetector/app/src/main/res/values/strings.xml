@@ -7,7 +7,7 @@
     <string name="start_title">Monitor events</string>
     <string name="set_title">Emergency contact</string>
     <string name="set_info">Please, insert the phone number you would like to call in a fall emergency</string>
-    <string name="set_code_hint">30</string>
+    <string name="set_code_hint">0030</string>
     <string name="set_phone_hint">69********</string>
     <string name="set_btn_done">Done</string>
 </resources>

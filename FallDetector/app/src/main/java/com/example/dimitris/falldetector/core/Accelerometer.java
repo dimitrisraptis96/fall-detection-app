@@ -26,7 +26,7 @@ public class Accelerometer implements SensorEventListener {
     private float accel_values[];
     private float last_accel_values[];
 
-    private int fallThreshold = 10;
+//    private int fallThreshold = 10;
 
     private float mAccelCurrent = SensorManager.GRAVITY_EARTH;
     private float mAccelLast = SensorManager.GRAVITY_EARTH;
@@ -53,7 +53,7 @@ public class Accelerometer implements SensorEventListener {
             mHandler.sendMessage(msg);
 
         } else {
-            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL); //sampling every 0.2sec => 5Hz
+            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_FASTEST); //sampling every 0.2sec => 5Hz
         }
     }
 
@@ -98,10 +98,10 @@ public class Accelerometer implements SensorEventListener {
                     mWindow.add(mAccelCurrent);
                     if (mWindow.isFull() && mWindow.isFallDetected()){
                         Log.w(TAG, "Fall detected by window class");
+                        mWindow.clear();
                         msg = mHandler.obtainMessage(Constants.MESSAGE_EMERGENCY);
                         mHandler.sendMessage(msg);
                     }
-
 //                    Inital approach
 //                    =====================================
 //                    if (mAccel > fallThreshold) {

@@ -14,10 +14,12 @@
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="100px"
+            android:paddingTop="100px"
+            android:paddingBottom="50px"
             android:textAlignment="center"
             android:text="@string/main_title"
             android:fontFamily="sans-serif"
@@ -26,11 +28,16 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"/>
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_man_circle"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:padding="40px"
+            android:padding="50px"
             android:text="@string/main_description"
             android:fontFamily="sans-serif"
             android:textSize="18dp"
@@ -42,8 +49,6 @@
             android:id="@+id/btn_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="30px"
-            android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
             android:text="@string/main_btn_choose"
             android:textColor="@color/white"/>
