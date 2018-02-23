@@ -49,10 +49,17 @@
             android:id="@+id/btn_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:text="@string/main_btn_choose"
             android:textColor="@color/white"/>
 
+        <Button
+            android:theme="@style/AppTheme.Gray"
+            android:id="@+id/btn_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="30px"
+            android:text="@string/main_btn_history"
+            android:textColor="@color/white"/>
 
         <Button
             android:theme="@style/AppTheme.Gray"

@@ -12,10 +12,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dimitris.falldetector.core.Accelerometer;
@@ -39,40 +36,12 @@ public class StartActivity extends AppCompatActivity{
 
     private LineChart mLineChart;
     private Plot mPlot;
-
-    private TextView mTextView;
-    private Button mButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
         mSwitchCompat = (SwitchCompat) findViewById(R.id.switch1);
-
-        mTextView =  (TextView) findViewById(R.id.tv_content);
-
-        // retieve history from shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
-        String history = sharedPreferences.getString(Constants.History,null);
-        mTextView.setText(history);
-
-        mButton = (Button) findViewById(R.id.btn_clear);
-        mButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // clear shared preferences history key
-                SharedPreferences sharedPreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(Constants.History, "");
-                editor.commit();
-
-                mTextView.setText("");
-
-            }
-        });
-
 
         mLineChart = (LineChart) findViewById(R.id.chart);
 
@@ -140,7 +109,6 @@ public class StartActivity extends AppCompatActivity{
                     editor.putString(Constants.History, oldHistory + newHistory);
                     editor.commit();
 
-                    mTextView.append(newHistory);
                     // stop listening the sensor
                     mSwitchCompat.setChecked(false);
 

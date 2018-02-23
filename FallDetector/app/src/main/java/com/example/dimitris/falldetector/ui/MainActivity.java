@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnSet;
     private Button btnStart;
+    private Button btnHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnStart = (Button) findViewById(R.id.btn_start);
         btnStart.setOnClickListener(this);
+
+        btnHistory = (Button) findViewById(R.id.btn_history);
+        btnHistory.setOnClickListener(this);
     }
 
     @Override
@@ -38,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             case R.id.btn_start:
                 intent = new Intent(this, StartActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btn_history:
+                intent = new Intent(this, HistoryActivity.class);
                 startActivity(intent);
                 return;
         }

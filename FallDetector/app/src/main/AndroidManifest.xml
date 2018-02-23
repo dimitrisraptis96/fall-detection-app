@@ -3,6 +3,7 @@
     package="com.example.dimitris.falldetector">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_man_circle"
@@ -19,7 +20,7 @@
         </activity>
         <activity android:name=".ui.SetActivity" />
         <activity android:name=".ui.StartActivity" />
-
+        <activity android:name=".ui.HistoryActivity"></activity>
     </application>
 
 </manifest>
