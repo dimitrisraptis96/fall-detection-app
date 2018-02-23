@@ -1,7 +1,7 @@
 package com.example.dimitris.falldetector;
 
 /**
- * Defines several constants used between {@link AccelerometerService} and the UI.
+ * Defines several constants used between {@link Accelerometer.class} and the UI.
  */
 public interface Constants {
 
@@ -18,6 +18,7 @@ public interface Constants {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String Code = "codeKey";
     public static final String Phone = "phoneKey";
+    public static final String History = "historyKey";
 
 
 }
